@@ -21,7 +21,16 @@ function list(){
 
 //POST:
 function create(pkg){
-    return new Package(pkg).save();
+    return new Package(pkg).save()
+    .catch((error) => {
+        if (error.code === 11000) {
+            //throw new Error(error.message);
+            const err = new Error('Duplicate');
+            err.status = 411;
+            throw err;
+        }
+        throw error; //capturamos aqui el resto de errores
+    })
 }
 
 module.exports = {

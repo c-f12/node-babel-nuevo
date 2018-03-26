@@ -10,5 +10,6 @@ function create(pkg){
 
 
 module.exports = {
-    list
+    list,
+    create
 };
